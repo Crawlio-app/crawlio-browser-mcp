@@ -1,0 +1,55 @@
+# Environment
+.env
+.env.*
+!.env.example
+
+# Node
+node_modules/
+dist/
+*.js.map
+.DS_Store
+
+# Build artifacts
+coverage/
+crawlio-extension-*/
+
+# Local config
+.mcp.json
+com.crawlio.agent.plist
+
+# Release archives
+*.zip
+
+# IDE / tooling
+/.claude/
+/.mentu/
+/.ralph/
+.claude-plugin/
+.worktrees/
+.review-screenshots/
+.playwright-mcp/
+
+# Internal docs (not shipped)
+/docs/
+plan.md
+CLAUDE.md
+
+# Internal assets
+/assets/
+
+# CWS assets
+/store-screenshots/
+store-screenshot.html
+
+# Dev screenshots
+welcome-*.png
+setup-*.png
+docs-*.png
+e2e-*.png
+
+# Internal scripts (kept locally, not shipped)
+ralph.yml
+scripts/ralph*.sh
+scripts/preflight.sh
+scripts/publish-oss.sh
+bin/crawlio-server.sh

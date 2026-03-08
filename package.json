@@ -1,0 +1,69 @@
+{
+  "name": "crawlio-browser",
+  "version": "1.5.6",
+  "description": "MCP server with 96 CDP-backed tools for browser automation — screenshots, DOM, network capture, framework detection, cookies, storage, session recording, performance metrics via Chrome",
+  "type": "module",
+  "main": "dist/mcp-server/index.js",
+  "bin": {
+    "crawlio-browser": "bin/crawlio-browser.js"
+  },
+  "files": [
+    "bin/crawlio-browser.js",
+    "dist/mcp-server/",
+    "skills/",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "npm run build:server && npm run build:extension",
+    "build:server": "node -e \"require('fs').rmSync('dist/mcp-server',{recursive:true,force:true})\" && tsup src/mcp-server/index.ts --format esm --dts --outDir dist/mcp-server && cp src/mcp-server/tool-embeddings.json dist/mcp-server/tool-embeddings.json",
+    "prepublishOnly": "npm run typecheck && npm run test && npm run build:server",
+    "build:extension": "rm -rf dist/extension && tsup src/extension/background.ts src/extension/popup.ts src/extension/welcome.ts --format iife --outDir dist/extension --define.__DEV__=false --minify && cd dist/extension && mv background.global.js background.js && mv popup.global.js popup.js && mv welcome.global.js welcome.js && cd ../.. && cp src/extension/manifest.prod.json dist/extension/manifest.json && cp src/extension/popup.html src/extension/popup.css src/extension/welcome.html src/extension/welcome.css src/extension/icon16.png src/extension/icon32.png src/extension/icon48.png src/extension/icon128.png dist/extension/",
+    "build:dev": "rm -rf dist/extension-dev && tsup src/extension/background.ts src/extension/popup.ts src/extension/welcome.ts --format iife --outDir dist/extension-dev --define.__DEV__=true && cd dist/extension-dev && mv background.global.js background.js && mv popup.global.js popup.js && mv welcome.global.js welcome.js && cd ../.. && cp src/extension/manifest.dev.json dist/extension-dev/manifest.json && cp src/extension/popup.html src/extension/popup.css src/extension/welcome.html src/extension/welcome.css src/extension/icon*.png dist/extension-dev/",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.extension.json",
+    "typecheck:extension": "tsc --noEmit -p tsconfig.extension.json",
+    "dev": "tsup src/mcp-server/index.ts --format esm --watch",
+    "generate:embeddings": "npx tsx scripts/generate-embeddings.ts",
+    "setup": "node dist/mcp-server/index.js init"
+  },
+  "keywords": [
+    "mcp",
+    "crawlio",
+    "browser-automation",
+    "chrome",
+    "model-context-protocol",
+    "ai",
+    "screenshots",
+    "dom",
+    "web-scraping",
+    "cdp",
+    "session-recording",
+    "network-capture"
+  ],
+  "homepage": "https://crawlio.app/agent",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Crawlio-app/crawlio-browser-mcp"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.8.0",
+    "express-rate-limit": "^8.2.1",
+    "ws": "^8.18.1",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.287",
+    "@types/ws": "^8.18.0",
+    "@vitest/coverage-v8": "^4.0.18",
+    "sharp": "^0.34.5",
+    "tsup": "^8.4.0",
+    "typescript": "^5.6.2",
+    "vitest": "^4.0.18"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "Crawlio for Chrome",
+  "version": "1.5.5",
+  "description": "Connect AI to your Browser. Let it navigate, click, take screenshots, inspect network traffic, and extract data.",
+  "homepage_url": "https://www.crawlio.app/agent",
+  "permissions": [
+    "alarms",
+    "debugger",
+    "storage"
+  ],
+  "optional_permissions": [
+    "tabs"
+  ],
+  "optional_host_permissions": [
+    "http://127.0.0.1/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "32": "icon32.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}
