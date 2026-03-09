@@ -1,3 +1,7 @@
+> **This repository has moved.** Active development continues at [`Crawlio-app/crawlio-browser-agent`](https://github.com/Crawlio-app/crawlio-browser-agent).
+>
+> Install the latest version: `npx -y crawlio-browser`
+
 # Crawlio Agent
 
 MCP server that gives AI full control of a live Chrome browser via CDP. 96 tools (92 browser + 3 session recording + 1 compiler) with framework-aware intelligence — captures what static crawlers can't see.
