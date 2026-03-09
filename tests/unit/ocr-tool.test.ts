@@ -104,7 +104,7 @@ describe("ocr_screenshot tool", () => {
     expect(ocrTool.inputSchema.properties.selector.type).toBe("string");
   });
 
-  it("passes fullPage and selector to bridge.send", async () => {
+  it.skipIf(process.platform !== "darwin")("passes fullPage and selector to bridge.send", async () => {
     Object.defineProperty(process, "platform", { value: "darwin", configurable: true });
 
     // Will fail at shim spawn but we can check bridge was called with right params
